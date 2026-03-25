@@ -1,0 +1,462 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 212B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.optimized
+#2 transferring dockerfile: 1.85kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:14-alpine
+#3 DONE 2.0s
+
+#4 [internal] load metadata for docker.io/library/nginx:alpine
+#4 DONE 3.1s
+
+#5 [build 1/9] FROM docker.io/library/node:14-alpine@sha256:434215b487a329c9e867202ff89e704d3a75e554822e07f3e0c0f9e606121b33
+#5 DONE 0.0s
+
+#6 [stage-1 1/4] FROM docker.io/library/nginx:alpine@sha256:f46cb72c7df02710e693e863a983ac42f6a9579058a59a35f1ae36c9958e4ce0
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 120.83kB 0.1s done
+#7 DONE 0.1s
+
+#8 [build 2/9] WORKDIR /app
+#8 CACHED
+
+#9 [build 3/9] RUN apk add --no-cache python3 make g++
+#9 CACHED
+
+#10 [build 4/9] COPY package.json ./
+#10 DONE 0.1s
+
+#11 [build 5/9] RUN node -e "const pkg=require('./package.json'); delete pkg.scripts.postinstall; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));"
+#11 DONE 0.9s
+
+#12 [build 6/9] RUN npm install --legacy-peer-deps --no-optional --ignore-scripts 2>&1 | tee npm-install.log || true
+#12 6.170 npm WARN deprecated @types/googlemaps@3.39.13: Types for the Google Maps browser API have moved to @types/google.maps. Note: these types are not for the googlemaps npm package, which is a Node API.
+#12 6.557 npm WARN deprecated conventional-changelog-cli@2.2.2: This package is no longer maintained. Please use the conventional-changelog package instead.
+#12 6.597 npm WARN deprecated eslint@7.32.0: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#12 7.666 npm WARN deprecated protractor@7.0.0: We have news to share - Protractor is deprecated and will reach end-of-life by Summer 2023. To learn more and find out about other options please refer to this post on the Angular blog. Thank you for using and contributing to Protractor. https://goo.gle/state-of-e2e-in-angular
+#12 7.703 npm WARN deprecated rimraf@2.6.1: Rimraf versions prior to v4 are no longer supported
+#12 7.927 npm WARN deprecated tslint@6.1.3: TSLint has been deprecated in favor of ESLint. Please see https://github.com/palantir/tslint/issues/4534 for more information.
+#12 12.73 npm WARN deprecated angular-tree-component@8.5.6: Library moved to @circlon/angular-tree-component
+#12 12.97 npm WARN deprecated bootstrap@4.3.1: This version of Bootstrap is no longer supported. Please upgrade to the latest version.
+#12 13.57 npm WARN deprecated core-js@2.5.1: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+#12 15.99 npm WARN deprecated ngx-dropzone@2.5.0: This package is deprecated and will no longer receive any updates. Please take a look at the official successor repo at hackingharold/ngx-dropzone
+#12 16.24 npm WARN deprecated ngx-awesome-uploader@10.0.4: This package is deprecated. It was not adding much benefits.
+#12 16.64 npm WARN deprecated popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+#12 20.22 npm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+#12 20.70 npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#12 21.34 npm WARN deprecated glob@7.1.6: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#12 22.01 npm WARN deprecated core-js@3.8.3: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+#12 22.37 npm WARN deprecated @schematics/update@0.1102.19: This was an internal-only Angular package up through Angular v11 which is no longer used or maintained. Upgrade Angular to v12+ to remove this dependency.
+#12 27.01 npm WARN deprecated @humanwhocodes/config-array@0.5.0: Use @eslint/config-array instead
+#12 27.41 npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#12 28.22 npm WARN deprecated q@1.4.1: You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+#12 28.22 npm WARN deprecated 
+#12 28.22 npm WARN deprecated (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
+#12 29.67 npm WARN deprecated glob@7.1.2: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#12 30.18 npm WARN deprecated @stylelint/postcss-markdown@0.36.2: Use the original unforked package instead: postcss-markdown
+#12 30.50 npm WARN deprecated intersection-observer@0.7.0: The Intersection Observer polyfill is no longer needed and can safely be removed. Intersection Observer has been Baseline since 2019.
+#12 30.50 npm WARN deprecated @stylelint/postcss-css-in-js@0.37.3: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#12 31.41 npm WARN deprecated glob@8.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#12 31.49 npm WARN deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#12 31.72 npm WARN deprecated npmlog@6.0.2: This package is no longer supported.
+#12 32.43 npm WARN deprecated read-package-json@5.0.2: This package is no longer supported. Please use @npmcli/package-json instead.
+#12 32.72 npm WARN deprecated readdir-scoped-modules@1.1.0: This functionality has been moved to @npmcli/fs
+#12 33.65 npm WARN deprecated @npmcli/ci-detect@2.0.0: this package has been deprecated, use `ci-info` instead
+#12 37.88 npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+#12 38.02 npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+#12 38.02 npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#12 38.67 npm WARN deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#12 40.04 npm WARN deprecated @babel/plugin-proposal-dynamic-import@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-dynamic-import instead.
+#12 40.05 npm WARN deprecated @babel/plugin-proposal-json-strings@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-json-strings instead.
+#12 40.14 npm WARN deprecated @babel/plugin-proposal-private-methods@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-methods instead.
+#12 40.20 npm WARN deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+#12 40.25 npm WARN deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+#12 40.29 npm WARN deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+#12 40.33 npm WARN deprecated @babel/plugin-proposal-unicode-property-regex@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-unicode-property-regex instead.
+#12 40.36 npm WARN deprecated @babel/plugin-proposal-async-generator-functions@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-async-generator-functions instead.
+#12 40.46 npm WARN deprecated @babel/plugin-proposal-logical-assignment-operators@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-logical-assignment-operators instead.
+#12 40.54 npm WARN deprecated @babel/plugin-proposal-optional-catch-binding@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-catch-binding instead.
+#12 40.68 npm WARN deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+#12 40.73 npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+#12 40.82 npm WARN deprecated @babel/plugin-proposal-object-rest-spread@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
+#12 41.01 npm WARN deprecated @babel/plugin-proposal-export-namespace-from@7.18.9: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-export-namespace-from instead.
+#12 43.03 npm WARN deprecated @humanwhocodes/object-schema@1.2.1: Use @eslint/object-schema instead
+#12 44.15 npm WARN deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#12 44.42 npm WARN deprecated q@1.5.1: You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+#12 44.42 npm WARN deprecated 
+#12 44.42 npm WARN deprecated (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
+#12 45.04 npm WARN deprecated caller-id@0.1.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#12 45.56 npm WARN deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#12 45.84 npm WARN deprecated @npmcli/move-file@2.0.1: This functionality has been moved to @npmcli/fs
+#12 45.85 npm WARN deprecated gauge@4.0.4: This package is no longer supported.
+#12 46.34 npm WARN deprecated @npmcli/disparity-colors@2.0.0: This package is no longer supported.
+#12 46.65 npm WARN deprecated debuglog@1.0.1: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#12 47.42 npm WARN deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+#12 48.90 npm WARN deprecated @npmcli/ci-detect@1.4.0: this package has been deprecated, use `ci-info` instead
+#12 49.13 npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+#12 49.82 npm WARN deprecated source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated
+#12 51.90 npm WARN deprecated git-raw-commits@2.0.11: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+#12 51.92 npm WARN deprecated git-semver-tags@4.1.1: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+#12 54.79 npm WARN deprecated npmlog@4.1.2: This package is no longer supported.
+#12 55.01 npm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+#12 55.07 npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+#12 55.64 npm WARN deprecated move-concurrently@1.0.1: This package is no longer supported.
+#12 55.68 npm WARN deprecated figgy-pudding@3.5.2: This module is no longer supported.
+#12 56.37 npm WARN deprecated @types/minimatch@6.0.0: This is a stub types definition. minimatch provides its own type definitions, so you do not need this installed.
+#12 57.34 npm WARN deprecated gauge@2.7.4: This package is no longer supported.
+#12 57.34 npm WARN deprecated are-we-there-yet@1.1.7: This package is no longer supported.
+#12 57.46 npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+#12 57.51 npm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+#12 57.72 npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+#12 58.36 npm WARN deprecated copy-concurrently@1.0.5: This package is no longer supported.
+#12 58.70 npm WARN deprecated fs-write-stream-atomic@1.0.10: This package is no longer supported.
+#12 71.04 npm WARN deprecated fsevents@1.2.13: Upgrade to fsevents v2 to mitigate potential security issues
+#12 268.0 npm notice created a lockfile as package-lock.json. You should commit this file.
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-linux-arm64-glibc@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-linux-arm64-glibc):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-linux-arm64-glibc@2.5.6: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-linux-arm-musl@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-linux-arm-musl):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-linux-arm-musl@2.5.6: wanted {"os":"linux","arch":"arm"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-linux-arm64-musl@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-linux-arm64-musl):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-linux-arm64-musl@2.5.6: wanted {"os":"linux","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-win32-x64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-win32-x64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-win32-x64@2.5.6: wanted {"os":"win32","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-freebsd-x64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-freebsd-x64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-freebsd-x64@2.5.6: wanted {"os":"freebsd","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-win32-arm64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-win32-arm64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-win32-arm64@2.5.6: wanted {"os":"win32","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-darwin-x64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-darwin-x64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-darwin-x64@2.5.6: wanted {"os":"darwin","arch":"x64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-linux-arm-glibc@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-linux-arm-glibc):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-linux-arm-glibc@2.5.6: wanted {"os":"linux","arch":"arm"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-android-arm64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-android-arm64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-android-arm64@2.5.6: wanted {"os":"android","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-win32-ia32@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-win32-ia32):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-win32-ia32@2.5.6: wanted {"os":"win32","arch":"ia32"} (current: {"os":"linux","arch":"x64"})
+#12 268.0 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: @parcel/watcher-darwin-arm64@2.5.6 (node_modules/@parcel/watcher/node_modules/@parcel/watcher-darwin-arm64):
+#12 268.0 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for @parcel/watcher-darwin-arm64@2.5.6: wanted {"os":"darwin","arch":"arm64"} (current: {"os":"linux","arch":"x64"})
+#12 268.1 npm WARN notsup Unsupported engine for @compodoc/compodoc@1.2.1: wanted: {"node":"^20.19.0 || ^22.12.0 || >=24.0.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: @compodoc/compodoc@1.2.1
+#12 268.1 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.1 (node_modules/rollup/node_modules/fsevents):
+#12 268.1 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+#12 268.1 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.2.7 (node_modules/watchpack-chokidar2/node_modules/chokidar/node_modules/fsevents):
+#12 268.1 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+#12 268.1 npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.2.7 (node_modules/webpack-dev-server/node_modules/chokidar/node_modules/fsevents):
+#12 268.1 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+#12 268.1 npm WARN notsup Unsupported engine for @angular-devkit/schematics@21.1.0: wanted: {"npm":"^6.11.0 || ^7.5.6 || >=8.0.0","node":"^20.19.0 || ^22.12.0 || >=24.0.0","yarn":">= 1.13.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: @angular-devkit/schematics@21.1.0
+#12 268.1 npm WARN notsup Unsupported engine for bootstrap.native@5.1.9: wanted: {"node":">=16","pnpm":">=8.6.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: bootstrap.native@5.1.9
+#12 268.1 npm WARN notsup Unsupported engine for body-parser@2.2.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: body-parser@2.2.2
+#12 268.1 npm WARN notsup Unsupported engine for cheerio@1.1.2: wanted: {"node":">=20.18.1"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: cheerio@1.1.2
+#12 268.1 npm WARN notsup Unsupported engine for chokidar@5.0.0: wanted: {"node":">= 20.19.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: chokidar@5.0.0
+#12 268.1 npm WARN notsup Unsupported engine for commander@14.0.3: wanted: {"node":">=20"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: commander@14.0.3
+#12 268.1 npm WARN notsup Unsupported engine for glob@13.0.6: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: glob@13.0.6
+#12 268.1 npm WARN notsup Unsupported engine for marked@7.0.3: wanted: {"node":">= 16"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: marked@7.0.3
+#12 268.1 npm WARN notsup Unsupported engine for sirv@3.0.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: sirv@3.0.2
+#12 268.1 npm WARN notsup Unsupported engine for tablesort@5.7.0: wanted: {"node":">= 22","npm":">= 10"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.1 npm WARN notsup Not compatible with your version of node/npm: tablesort@5.7.0
+#12 268.2 npm WARN notsup Unsupported engine for ora@9.0.0: wanted: {"node":">=20"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: ora@9.0.0
+#12 268.2 npm WARN notsup Unsupported engine for @angular-devkit/core@21.1.0: wanted: {"npm":"^6.11.0 || ^7.5.6 || >=8.0.0","node":"^20.19.0 || ^22.12.0 || >=24.0.0","yarn":">= 1.13.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: @angular-devkit/core@21.1.0
+#12 268.2 npm WARN notsup Unsupported engine for cli-cursor@5.0.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: cli-cursor@5.0.0
+#12 268.2 npm WARN notsup Unsupported engine for log-symbols@7.0.1: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: log-symbols@7.0.1
+#12 268.2 npm WARN notsup Unsupported engine for string-width@8.2.0: wanted: {"node":">=20"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: string-width@8.2.0
+#12 268.2 npm WARN notsup Unsupported engine for cli-spinners@3.4.0: wanted: {"node":">=18.20"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: cli-spinners@3.4.0
+#12 268.2 npm WARN notsup Unsupported engine for is-unicode-supported@2.1.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: is-unicode-supported@2.1.0
+#12 268.2 npm WARN notsup Unsupported engine for stdin-discarder@0.2.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: stdin-discarder@0.2.2
+#12 268.2 npm WARN notsup Unsupported engine for restore-cursor@5.1.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: restore-cursor@5.1.0
+#12 268.2 npm WARN notsup Unsupported engine for onetime@7.0.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: onetime@7.0.0
+#12 268.2 npm WARN notsup Unsupported engine for mimic-function@5.0.1: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: mimic-function@5.0.1
+#12 268.2 npm WARN notsup Unsupported engine for yoctocolors@2.1.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: yoctocolors@2.1.2
+#12 268.2 npm WARN notsup Unsupported engine for get-east-asian-width@1.5.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: get-east-asian-width@1.5.0
+#12 268.2 npm WARN notsup Unsupported engine for send@1.2.1: wanted: {"node":">= 18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: send@1.2.1
+#12 268.2 npm WARN notsup Unsupported engine for mime-types@3.0.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.2 npm WARN notsup Not compatible with your version of node/npm: mime-types@3.0.2
+#12 268.3 npm WARN notsup Unsupported engine for mime-types@3.0.2: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: mime-types@3.0.2
+#12 268.3 npm WARN notsup Unsupported engine for @thednp/event-listener@2.0.14: wanted: {"node":">=16","pnpm":">=8.6.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: @thednp/event-listener@2.0.14
+#12 268.3 npm WARN notsup Unsupported engine for @thednp/position-observer@1.1.2: wanted: {"node":">=16","pnpm":">=8.6.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: @thednp/position-observer@1.1.2
+#12 268.3 npm WARN notsup Unsupported engine for @thednp/shorty@2.0.13: wanted: {"node":">=16","pnpm":">=8.6.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: @thednp/shorty@2.0.13
+#12 268.3 npm WARN notsup Unsupported engine for undici@7.24.5: wanted: {"node":">=20.18.1"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: undici@7.24.5
+#12 268.3 npm WARN notsup Unsupported engine for whatwg-mimetype@4.0.0: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: whatwg-mimetype@4.0.0
+#12 268.3 npm WARN notsup Unsupported engine for whatwg-encoding@3.1.1: wanted: {"node":">=18"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: whatwg-encoding@3.1.1
+#12 268.3 npm WARN notsup Unsupported engine for readdirp@5.0.0: wanted: {"node":">= 20.19.0"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: readdirp@5.0.0
+#12 268.3 npm WARN notsup Unsupported engine for minimatch@10.2.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: minimatch@10.2.4
+#12 268.3 npm WARN notsup Unsupported engine for path-scurry@2.0.2: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: path-scurry@2.0.2
+#12 268.3 npm WARN notsup Unsupported engine for brace-expansion@5.0.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: brace-expansion@5.0.4
+#12 268.3 npm WARN notsup Unsupported engine for balanced-match@4.0.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: balanced-match@4.0.4
+#12 268.3 npm WARN notsup Unsupported engine for lru-cache@11.2.7: wanted: {"node":"20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: lru-cache@11.2.7
+#12 268.3 npm WARN notsup Unsupported engine for minimatch@10.2.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: minimatch@10.2.4
+#12 268.3 npm WARN notsup Unsupported engine for brace-expansion@5.0.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: brace-expansion@5.0.4
+#12 268.3 npm WARN notsup Unsupported engine for balanced-match@4.0.4: wanted: {"node":"18 || 20 || >=22"} (current: {"node":"14.21.3","npm":"6.14.18"})
+#12 268.3 npm WARN notsup Not compatible with your version of node/npm: balanced-match@4.0.4
+#12 268.4 npm WARN @nebular/auth@5.0.0 requires a peer of @angular/core@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/auth@5.0.0 requires a peer of @angular/forms@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/auth@5.0.0 requires a peer of @nebular/theme@5.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/auth@5.0.0 requires a peer of @angular/common@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/auth@5.0.0 requires a peer of @angular/router@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/eva-icons@5.0.0 requires a peer of @nebular/theme@5.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/date-fns@5.0.0 requires a peer of @nebular/theme@5.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.4 npm WARN @nebular/theme@6.2.3 requires a peer of @angular/core@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/theme@6.2.3 requires a peer of @angular/common@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/theme@6.2.3 requires a peer of @angular/router@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/theme@6.2.3 requires a peer of @angular/animations@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/security@5.0.0 requires a peer of tslib@^1.9.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/security@5.0.0 requires a peer of @angular/core@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/security@5.0.0 requires a peer of @angular/common@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.5 npm WARN @nebular/security@5.0.0 requires a peer of @angular/router@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ng-bootstrap/ng-bootstrap@6.2.0 requires a peer of tslib@^1.10.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ng-bootstrap/ng-bootstrap@6.2.0 requires a peer of @angular/core@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ng-bootstrap/ng-bootstrap@6.2.0 requires a peer of @angular/forms@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ng-bootstrap/ng-bootstrap@6.2.0 requires a peer of @angular/common@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ng-bootstrap/ng-bootstrap@6.2.0 requires a peer of @angular/localize@^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ngx-translate/core@12.1.2 requires a peer of tslib@^1.10.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @ngx-translate/http-loader@5.0.0 requires a peer of tslib@^1.10.0 but none is installed. You must install peer dependencies yourself.
+#12 268.6 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of tslib@^1.10.0 but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/cdk@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/core@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/forms@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/common@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/animations@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/platform-browser@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN @swimlane/ngx-charts@13.0.4 requires a peer of @angular/platform-browser-dynamic@7.x || 8.x || 9.x but none is installed. You must install peer dependencies yourself.
+#12 268.7 npm WARN ng2-smart-table@1.7.2 requires a peer of @angular/core@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ng2-smart-table@1.7.2 requires a peer of @angular/forms@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ng2-smart-table@1.7.2 requires a peer of @angular/common@^10.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ng6-file-man@3.0.2 requires a peer of @angular/core@^10.2.4 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ng6-file-man@3.0.2 requires a peer of @angular/common@^10.2.4 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ngx-malihu-scrollbar@9.0.0 requires a peer of @angular/core@^8.0.0 || ^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ngx-malihu-scrollbar@9.0.0 requires a peer of tslib@^1.10.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ngx-summernote@0.7.7 requires a peer of @angular/common@^8.0.0||^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.8 npm WARN ngx-summernote@0.7.7 requires a peer of @angular/core@^8.0.0||^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.9 npm WARN ngx-summernote@0.7.7 requires a peer of @angular/forms@^8.0.0||^9.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.9 npm WARN ngx-filesaver@8.1.0 requires a peer of @types/file-saver@^2.0.0 but none is installed. You must install peer dependencies yourself.
+#12 268.9 npm WARN @angular-eslint/builder@1.2.0 requires a peer of @angular-devkit/architect@~0.1001.4 || ~0.1100.1 but none is installed. You must install peer dependencies yourself.
+#12 268.9 npm WARN karma-jasmine-html-reporter@1.7.0 requires a peer of jasmine-core@>=3.8 but none is installed. You must install peer dependencies yourself.
+#12 268.9 npm WARN tslint-language-service@0.9.9 requires a peer of typescript@>= 2.3.1 < 3 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN tslint-language-service@0.9.9 requires a peer of tslint@>= 4 < 6 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN vis-network@10.0.2 requires a peer of @egjs/hammerjs@^2.0.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN vis-network@10.0.2 requires a peer of keycharm@^0.2.0 || ^0.3.0 || ^0.4.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN vis-network@10.0.2 requires a peer of vis-data@>=8.0.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN vis-network@10.0.2 requires a peer of vis-util@>=6.0.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN @babel/plugin-transform-class-static-block@7.28.6 requires a peer of @babel/core@^7.12.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.27.1 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+#12 269.0 npm WARN shopizer-admin@ No description
+#12 269.1 npm WARN shopizer-admin@ No repository field.
+#12 269.1 npm WARN shopizer-admin@ No license field.
+#12 269.1 
+#12 269.1 added 2524 packages from 1635 contributors and audited 2555 packages in 267.244s
+#12 272.0 
+#12 272.0 308 packages are looking for funding
+#12 272.0   run `npm fund` for details
+#12 272.0 
+#12 272.0 found 364 vulnerabilities (49 low, 64 moderate, 245 high, 6 critical)
+#12 272.0   run `npm audit fix` to fix them, or `npm audit` for details
+#12 DONE 272.6s
+
+#13 [build 7/9] RUN timeout 120 npx ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points || echo "ngcc completed or timed out"
+#13 8.637 [33mWarning:[0m Entry point 'ngx-echarts/core' contains deep imports into '/app/node_modules/echarts/lib/echarts'. This is probably not a problem, but may cause the compilation of entry points to be out of order.
+#13 11.20 Compiling @angular/core : es2015 as esm2015
+#13 11.21 Compiling @angular/animations : es2015 as esm2015
+#13 11.27 Compiling @angular/cdk/keycodes : es2015 as esm2015
+#13 11.30 Compiling @angular/compiler/testing : es2015 as esm2015
+#13 25.00 Compiling @angular/cdk/collections : es2015 as esm2015
+#13 25.00 Compiling @angular/animations/browser : es2015 as esm2015
+#13 25.00 Compiling @angular/cdk/observers : es2015 as esm2015
+#13 25.01 Compiling @angular/common : es2015 as esm2015
+#13 27.28 Compiling @angular/cdk/platform : es2015 as esm2015
+#13 27.82 Compiling @angular/platform-browser : es2015 as esm2015
+#13 28.08 Compiling @angular/forms : es2015 as esm2015
+#13 28.61 Compiling @angular/common/http : es2015 as esm2015
+#13 28.88 Compiling @angular/cdk/bidi : es2015 as esm2015
+#13 29.70 Compiling @angular/cdk/a11y : es2015 as esm2015
+#13 30.01 Compiling @angular/cdk/scrolling : es2015 as esm2015
+#13 30.89 Compiling @angular/cdk/portal : es2015 as esm2015
+#13 31.34 Compiling @angular/router : es2015 as esm2015
+#13 31.43 Compiling @ngx-translate/core : es2015 as esm2015
+#13 32.15 Compiling @angular/core/testing : es2015 as esm2015
+#13 32.23 Compiling @angular/cdk/overlay : es2015 as esm2015
+#13 32.87 Compiling @angular/cdk/table : es2015 as esm2015
+#13 32.99 Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+#13 34.02 Compiling @angular/platform-browser/testing : es2015 as esm2015
+#13 34.33 Compiling @angular/common/testing : es2015 as esm2015
+#13 34.39 Compiling @ngx-translate/core : es2015 as esm2015
+#13 34.40 Compiling ng2-completer : es2015 as esm2015
+#13 34.70 Compiling ngx-smart-modal : es2015 as esm2015
+#13 34.80 Compiling @nebular/theme : es2015 as esm2015
+#13 35.29 Compiling @ngx-translate/http-loader : es2015 as esm2015
+#13 35.34 Compiling ngx-filesaver : es2015 as esm2015
+#13 35.67 Compiling @akveo/ng2-completer : es2015 as esm2015
+#13 36.11 Compiling @angular/animations/browser/testing : es2015 as esm2015
+#13 36.41 Compiling @angular/cdk/accordion : es2015 as esm2015
+#13 36.47 Compiling @angular/cdk/clipboard : es2015 as esm2015
+#13 36.87 Compiling @angular/cdk/drag-drop : es2015 as esm2015
+#13 36.92 Compiling @angular/cdk/layout : es2015 as esm2015
+#13 37.18 Compiling @angular/cdk/stepper : es2015 as esm2015
+#13 37.50 Compiling @angular/cdk/text-field : es2015 as esm2015
+#13 38.03 Compiling @angular/cdk/tree : es2015 as esm2015
+#13 38.08 Compiling @angular/common/http/testing : es2015 as esm2015
+#13 38.40 Compiling @angular/platform-browser/animations : es2015 as esm2015
+#13 38.42 Compiling @angular/platform-browser-dynamic/testing : es2015 as esm2015
+#13 38.77 Compiling @angular/router/testing : es2015 as esm2015
+#13 39.01 Compiling @asymmetrik/ngx-leaflet : module as esm5
+#13 39.21 Compiling @nebular/security : es2015 as esm2015
+#13 39.27 Compiling @ng-bootstrap/ng-bootstrap : es2015 as esm2015
+#13 39.93 Compiling @ngx-translate/http-loader : es2015 as esm2015
+#13 40.13 Compiling @swimlane/ngx-charts : es2015 as esm2015
+#13 40.53 Compiling angular-file : module as esm2015
+#13 40.77 Compiling angular-tree-component : module as esm5
+#13 43.11 Compiling angular2-chartjs : main as commonjs
+#13 43.42 Compiling angular2-query-builder : module as esm5
+#13 44.98 Compiling angular2-query-builder : es2015 as esm2015
+#13 45.76 Compiling ng-multiselect-dropdown : es2015 as esm2015
+#13 45.77 Compiling @nebular/auth : es2015 as esm2015
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-operator.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-operator.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-field.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-field.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-entity.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-entity.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-switch-group.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-switch-group.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-button-group.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-button-group.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-input.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-input.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-remove-button.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-remove-button.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-empty-warning.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-empty-warning.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-arrow-icon.directive.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-arrow-icon.directive.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.94 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-builder.component.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/query-builder/query-builder.component.d.ts.
+#13 45.94 This error may be caused by one of the following:
+#13 45.94 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.94   In this case, you should check other entry-points in this package
+#13 45.94   and set up a config to ignore any that you are not using.
+#13 45.94 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.94   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.95 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/angular2-query-builder.module.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/lib/angular2-query-builder.module.d.ts.
+#13 45.95 This error may be caused by one of the following:
+#13 45.95 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.95   In this case, you should check other entry-points in this package
+#13 45.95   and set up a config to ignore any that you are not using.
+#13 45.95 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.95   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.95 [31mError:[0m Tried to write /app/node_modules/angular2-query-builder/dist/angular2-query-builder/angular2-query-builder.d.ts.__ivy_ngcc_bak with an ngcc back up file but it already exists so not writing, nor backing up, /app/node_modules/angular2-query-builder/dist/angular2-query-builder/angular2-query-builder.d.ts.
+#13 45.95 This error may be caused by one of the following:
+#13 45.95 * two or more entry-points overlap and ngcc has been asked to process some files more than once.
+#13 45.95   In this case, you should check other entry-points in this package
+#13 45.95   and set up a config to ignore any that you are not using.
+#13 45.95 * a previous run of ngcc was killed in the middle of processing, in a way that cannot be recovered.
+#13 45.95   In this case, you should try cleaning the node_modules directory and any dist directories that contain local libraries. Then try again.
+#13 45.95 Compiling @nebular/date-fns : es2015 as esm2015
+#13 46.61 Compiling @nebular/eva-icons : es2015 as esm2015
+#13 48.91 Compiling @nebular/moment : es2015 as esm2015
+#13 49.55 Compiling ng2-smart-table : es2015 as esm2015
+#13 49.66 Compiling ng6-file-man : es2015 as esm2015
+#13 50.95 Compiling ngx-awesome-uploader : es2015 as esm2015
+#13 51.43 Compiling ngx-dropzone : es2015 as esm2015
+#13 52.89 Compiling ngx-echarts : es2015 as esm2015
+#13 53.01 Compiling ngx-echarts/core : es2015 as esm2015
+#13 53.08 Compiling ngx-lightbox : main as commonjs
+#13 53.49 Compiling ngx-malihu-scrollbar : es2015 as esm2015
+#13 53.58 Compiling ngx-summernote : es2015 as esm2015
+#13 53.65 Compiling ngx-toastr : es2015 as esm2015
+#13 DONE 54.8s
+
+#14 [build 8/9] COPY . .
+#14 DONE 0.4s
+
+#15 [build 9/9] RUN npm run build -- --configuration production || npm run build
+#15 0.763 
+#15 0.763 > shopizer-admin@ build /app
+#15 0.763 > node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod "--configuration" "production"
+#15 0.763 
+#15 10.59 - Generating browser application bundles...
