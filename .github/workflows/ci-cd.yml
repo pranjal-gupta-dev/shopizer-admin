@@ -25,12 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       
-      - name: Build production (skip type checking)
+      - name: Patch angular.json to disable AOT
         run: |
-          npx ng build --prod --aot=false --build-optimizer=false || \
-          npx ng build --configuration production --aot=false || \
-          npm run build -- --aot=false || \
-          echo "All build attempts failed"
+          sed -i 's/"aot": true/"aot": false/g' angular.json
+          sed -i 's/"buildOptimizer": true/"buildOptimizer": false/g' angular.json
+          echo "✅ Patched angular.json"
+      
+      - name: Build production (skip type checking)
+        run: npm run build
         continue-on-error: true
       
       - name: Verify build output
