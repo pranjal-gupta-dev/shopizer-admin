@@ -12,8 +12,6 @@ jobs:
   build:
     name: Build Angular App
     runs-on: ubuntu-latest
-    outputs:
-      build_success: ${{ steps.check_build.outputs.build_success }}
     
     steps:
       - name: Checkout code
@@ -28,82 +26,15 @@ jobs:
         run: npm install --legacy-peer-deps
       
       - name: Build production
-        id: build_step
         run: npm run build
         continue-on-error: true
-      
-      - name: Check build output
-        id: check_build
-        run: |
-          if [ -d "dist" ] && [ "$(ls -A dist 2>/dev/null)" ]; then
-            echo "build_success=true" >> $GITHUB_OUTPUT
-            echo "✅ Build succeeded"
-          else
-            echo "build_success=false" >> $GITHUB_OUTPUT
-            echo "⚠️ Build failed - using Dockerfile.simple for source deployment"
-          fi
       
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: admin-build
-          path: dist/
+          path: |
+            dist/
+            src/
           retention-days: 7
-        if: steps.check_build.outputs.build_success == 'true'
-
-  docker-build:
-    name: Build Docker Image
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/ci-pipeline')
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Check if build succeeded
-        id: check_artifact
-        run: echo "has_build=${{ needs.build.outputs.build_success }}" >> $GITHUB_OUTPUT
-      
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: admin-build
-          path: dist/
-        if: needs.build.outputs.build_success == 'true'
-        continue-on-error: true
-      
-      - name: Build Docker image (from dist)
-        if: needs.build.outputs.build_success == 'true'
-        run: |
-          ls -lh dist/
-          DOCKER_BUILDKIT=0 docker build -t shopizer-admin:latest .
-          echo "✅ Docker image built from dist"
-      
-      - name: Build Docker image (from source - fallback)
-        if: needs.build.outputs.build_success != 'true'
-        run: |
-          DOCKER_BUILDKIT=0 docker build -f Dockerfile.simple -t shopizer-admin:latest .
-          echo "✅ Docker image built from source"
-      
-      - name: Test image
-        run: |
-          docker run --rm -d -p 8082:80 --name test-admin shopizer-admin:latest
-          sleep 5
-          curl -f http://localhost:8082 || exit 1
-          docker stop test-admin
-          echo "✅ Image validated"
-      
-      - name: Save image as artifact
-        run: |
-          docker save shopizer-admin:latest | gzip > shopizer-admin-image.tar.gz
-          ls -lh shopizer-admin-image.tar.gz
-          echo "✅ Image saved"
-      
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: admin-docker-image
-          path: shopizer-admin-image.tar.gz
-          retention-days: 7
-          compression-level: 0
+        if: always()
