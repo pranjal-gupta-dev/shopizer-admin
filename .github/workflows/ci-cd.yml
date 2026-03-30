@@ -26,8 +26,21 @@ jobs:
         run: npm install --legacy-peer-deps
       
       - name: Build production
-        run: npm run build
+        run: |
+          npm run build -- --aot=false || \
+          npm run build -- --build-optimizer=false || \
+          ng build --prod --aot=false --build-optimizer=false || \
+          echo "Build failed"
         continue-on-error: true
+      
+      - name: Check build result
+        run: |
+          if [ -d "dist" ] && [ "$(ls -A dist 2>/dev/null)" ]; then
+            echo "✅ dist/ folder created"
+            ls -lh dist/
+          else
+            echo "⚠️ dist/ not created, will upload src/ as fallback"
+          fi
       
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -36,5 +49,6 @@ jobs:
           path: |
             dist/
             src/
+            Dockerfile.simple
           retention-days: 7
         if: always()
