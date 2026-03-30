@@ -1,62 +1,30 @@
-name: Shopizer Admin Build
+name: CI
 
 on:
   push:
-    branches: [main, develop, ci-pipeline]
-  workflow_dispatch:
-
-env:
-  NODE_VERSION: '14'
+    branches: ['**']
 
 jobs:
   build:
-    name: Build Angular App
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-      
+          node-version: '14'
+
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      
-      - name: Patch angular.json to disable AOT
         run: |
-          sed -i 's/"aot": true/"aot": false/g' angular.json
-          sed -i 's/"buildOptimizer": true/"buildOptimizer": false/g' angular.json
-          echo "✅ Patched angular.json"
-      
-      - name: Build production (skip type checking)
+          npm install --legacy-peer-deps
+          npm install font-awesome
+          npm install @types/jquery@3.5.5 @types/ws@7.4.7 @types/minimatch@3.0.5 angular-file@3.1.2
+
+      - name: Build
         run: npm run build
-        continue-on-error: true
-      
-      - name: Verify build output
-        id: verify
-        run: |
-          if [ -d "dist" ] && [ "$(ls -A dist 2>/dev/null)" ]; then
-            echo "✅ SUCCESS: dist/ folder created"
-            ls -lh dist/
-            echo "has_dist=true" >> $GITHUB_OUTPUT
-          else
-            echo "⚠️ WARNING: No dist/ folder - will use source build"
-            echo "has_dist=false" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Upload build artifact
+
+      - name: Upload dist
         uses: actions/upload-artifact@v4
         with:
-          name: admin-build
-          path: |
-            dist/
-            src/
-            package.json
-            angular.json
-            tsconfig.json
-            Dockerfile.simple
-          retention-days: 7
-        if: always()
+          name: shopizer-admin-dist
+          path: dist/
