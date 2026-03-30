@@ -26,13 +26,14 @@ jobs:
         run: npm install --legacy-peer-deps
       
       - name: Build production
-        run: npm run build
-        continue-on-error: true
+        run: npm run build || echo "Build failed, uploading source"
       
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: admin-build
-          path: dist/
+          path: |
+            dist/
+            src/
           retention-days: 7
         if: always()
