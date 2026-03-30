@@ -11,31 +11,31 @@ const routes: Routes = [{
     {
       path: 'categories',
       canActivate: [MarketplaceGuard],
-      loadChildren: 'app/pages/catalogue/categories/categories.module#CategoriesModule'
+      loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
     },
     {
       path: 'products',
-      loadChildren: 'app/pages/catalogue/products/products.module#ProductsModule'
+      loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
     },
     {
       path: 'brands',
-      loadChildren: 'app/pages/catalogue/brands/brands.module#BrandsModule'
+      loadChildren: () => import('./brands/brands.module').then(m => m.BrandsModule)
     },
     {
       path: 'catalogues',
-      loadChildren: 'app/pages/catalogue/catalogues/catalogues.module#CataloguesModule'
+      loadChildren: () => import('./catalogues/catalogues.module').then(m => m.CataloguesModule)
     },
     {
       path: 'products-groups',
-      loadChildren: 'app/pages/catalogue/products-groups/products-groups.module#ProductsGroupsModule'
+      loadChildren: () => import('./products-groups/products-groups.module').then(m => m.ProductsGroupsModule)
     },
     {
       path: 'options',
-      loadChildren: 'app/pages/catalogue/options/options.module#OptionsModule'
+      loadChildren: () => import('./options/options.module').then(m => m.OptionsModule)
     },
     {
       path: 'types',
-      loadChildren: 'app/pages/catalogue/types/types.module#TypesModule'
+      loadChildren: () => import('./types/types.module').then(m => m.TypesModule)
     },
   ]
 }];

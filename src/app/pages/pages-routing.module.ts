@@ -14,45 +14,45 @@ const routes: Routes = [{
   children: [
     {
       path: 'home',
-      loadChildren: 'app/pages/home/home.module#HomeModule'
+      loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
     },
     {
       path: 'orders',
       // canActivate: [OrdersGuard],
-      loadChildren: 'app/pages/orders/orders.module#OrdersModule'
+      loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
     },
     {
       path: 'user-management',
-      loadChildren: 'app/pages/user-management/user-management.module#UserManagementModule'
+      loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule)
     },
     {
       path: 'store-management',
-      loadChildren: 'app/pages/store-management/store-management.module#StoreManagementModule'
+      loadChildren: () => import('./store-management/store-management.module').then(m => m.StoreManagementModule)
     },
     {
       path: 'catalogue',
       canActivate: [SuperadminStoreRetailCatalogueGuard],
-      loadChildren: 'app/pages/catalogue/catalogue.module#CatalogueModule'
+      loadChildren: () => import('./catalogue/catalogue.module').then(m => m.CatalogueModule)
     },
     {
       path: 'content',
-      loadChildren: 'app/pages/content/content.module#ContentModule'
+      loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
     },
     {
       path: 'shipping',
-      loadChildren: 'app/pages/shipping/shipping.module#ShippingModule'
+      loadChildren: () => import('./shipping/shipping.module').then(m => m.ShippingModule)
     },
     {
       path: 'payment',
-      loadChildren: 'app/pages/payment/payment.module#PaymentModule'
+      loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule)
     },
     {
       path: 'tax-management',
-      loadChildren: 'app/pages/tax-management/tax-management.module#TaxManagementModule'
+      loadChildren: () => import('./tax-management/tax-management.module').then(m => m.TaxManagementModule)
     },
     {
       path: 'customer',
-      loadChildren: 'app/pages/customers/customer.module#CustomersModule'
+      loadChildren: () => import('./customers/customer.module').then(m => m.CustomersModule)
     },
     {
       path: 'error-500',
