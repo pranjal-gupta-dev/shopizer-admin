@@ -2,9 +2,10 @@ name: Shopizer Admin CI/CD
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, ci-pipeline]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, ci-pipeline]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: '14'
