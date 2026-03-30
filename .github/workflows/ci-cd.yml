@@ -26,14 +26,59 @@ jobs:
         run: npm install --legacy-peer-deps
       
       - name: Build production
-        run: npm run build || echo "Build failed, uploading source"
+        run: npm run build
       
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: admin-build
-          path: |
-            dist/
-            src/
+          path: dist/
           retention-days: 7
-        if: always()
+
+  docker-build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/ci-pipeline')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: admin-build
+          path: dist/
+      
+      - name: Verify build exists
+        run: |
+          ls -lh dist/
+          echo "✅ Build artifact downloaded"
+      
+      - name: Build Docker image
+        run: |
+          DOCKER_BUILDKIT=0 docker build -t shopizer-admin:latest .
+          echo "✅ Docker image built"
+      
+      - name: Test image
+        run: |
+          docker run --rm -d -p 8082:80 --name test-admin shopizer-admin:latest
+          sleep 5
+          curl -f http://localhost:8082 || exit 1
+          docker stop test-admin
+          echo "✅ Image validated"
+      
+      - name: Save image as artifact
+        run: |
+          docker save shopizer-admin:latest | gzip > shopizer-admin-image.tar.gz
+          ls -lh shopizer-admin-image.tar.gz
+          echo "✅ Image saved"
+      
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-docker-image
+          path: shopizer-admin-image.tar.gz
+          retention-days: 7
+          compression-level: 0
