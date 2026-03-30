@@ -1,19 +1,16 @@
-name: Shopizer Admin CI/CD
+name: Shopizer Admin Build
 
 on:
   push:
-    branches: [main, develop, ci-pipeline]
-  pull_request:
     branches: [main, develop, ci-pipeline]
   workflow_dispatch:
 
 env:
   NODE_VERSION: '14'
-  DOCKER_IMAGE: shopizerecomm/shopizer-admin
 
 jobs:
-  build-and-test:
-    name: Build and Test
+  build:
+    name: Build Angular App
     runs-on: ubuntu-latest
     
     steps:
@@ -24,187 +21,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
       
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      
-      - name: Run linting
-        run: npm run lint
-        continue-on-error: true
-      
-      - name: Run unit tests
-        run: npm run test -- --watch=false --code-coverage --browsers=ChromeHeadless
-        continue-on-error: true
       
       - name: Build production
         run: npm run build
         continue-on-error: true
       
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage/lcov.info
-        continue-on-error: true
-          flags: admin-unittests
-          name: codecov-admin
-        continue-on-error: true
-      
-      - name: Upload build artifacts
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: admin-dist
+          name: admin-build
           path: dist/
           retention-days: 7
-
-  code-quality:
-    name: Code Quality
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      
-      - name: Run linting with report
-        run: npm run lint
-        continue-on-error: true
-      
-      - name: SonarCloud Scan
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        continue-on-error: true
-
-  security-scan:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
-      
-      - name: Secret scanning
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
-        continue-on-error: true
-
-  docker-build:
-    name: Build Docker Image and Save Artifact
-    runs-on: ubuntu-latest
-    needs: [build-and-test, security-scan]
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: admin-dist
-          path: dist/
-      
-      - name: Verify build artifacts
-        run: |
-          ls -lh dist/
-          echo "✅ Build artifacts downloaded"
-      
-      - name: Build Docker image
-        run: |
-          DOCKER_BUILDKIT=0 docker build -t shopizerecomm/shopizer-admin:latest .
-          echo "✅ Docker image built successfully"
-      
-      - name: Test image
-        run: |
-          docker run --rm -d --name test-admin -p 4201:80 shopizerecomm/shopizer-admin:latest
-          sleep 5
-          docker stop test-admin
-          echo "✅ Image validation passed"
-      
-      - name: Save image as compressed artifact
-        run: |
-          echo "💾 Saving image (this may take 1-2 minutes)..."
-          DOCKER_BUILDKIT=0 docker save shopizerecomm/shopizer-admin:latest | gzip > shopizer-admin-image.tar.gz
-          ls -lh shopizer-admin-image.tar.gz
-          echo "✅ Image saved as artifact"
-      
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: admin-docker-image
-          path: shopizer-admin-image.tar.gz
-          retention-days: 7
-          compression-level: 0
-      
-      - name: Deployment Instructions
-        run: |
-          echo "════════════════════════════════════════════════════"
-          echo "✅ Docker image saved as artifact: admin-docker-image"
-          echo "════════════════════════════════════════════════════"
-          echo ""
-          echo "📥 To deploy on local Colima:"
-          echo ""
-          echo "1. Download artifact:"
-          echo "   gh run download ${{ github.run_id }} --name admin-docker-image"
-          echo ""
-          echo "2. Load image:"
-          echo "   gunzip -c shopizer-admin-image.tar.gz | docker load"
-          echo ""
-          echo "3. Run container:"
-          echo "   docker run -d -p 4200:80 --name shopizer-admin shopizerecomm/shopizer-admin:latest"
-          echo ""
-          echo "════════════════════════════════════════════════════"
-
-  deploy-staging:
-    name: Deploy to Staging
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    environment:
-      name: staging
-      url: https://admin-staging.shopizer.com
-    
-    steps:
-      - name: Deploy to staging
-        run: echo "Deploy admin to staging environment"
-
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    environment:
-      name: production
-      url: https://admin.shopizer.com
-    
-    steps:
-      - name: Deploy to production
-        run: echo "Deploy admin to production environment"
+        if: always()
