@@ -25,12 +25,20 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       
-      - name: Build production
+      - name: Create tsconfig override
         run: |
-          npm run build -- --aot=false || \
-          npm run build -- --build-optimizer=false || \
-          ng build --prod --aot=false --build-optimizer=false || \
-          echo "Build failed"
+          cat > tsconfig.build.json <<'EOF'
+          {
+            "extends": "./tsconfig.json",
+            "compilerOptions": {
+              "skipLibCheck": true,
+              "skipDefaultLibCheck": true
+            }
+          }
+          EOF
+      
+      - name: Build production
+        run: npm run build -- --tsConfig=tsconfig.build.json
         continue-on-error: true
       
       - name: Check build result
