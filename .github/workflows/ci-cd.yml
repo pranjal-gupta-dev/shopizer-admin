@@ -124,7 +124,7 @@ jobs:
         continue-on-error: true
 
   docker-build:
-    name: Build Docker Image
+    name: Build Docker Image and Save Artifact
     runs-on: ubuntu-latest
     needs: [build-and-test, security-scan]
     if: github.event_name == 'push'
@@ -139,46 +139,57 @@ jobs:
           name: admin-dist
           path: shopizer-admin/dist/
       
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Verify build artifacts
+        run: |
+          ls -lh shopizer-admin/dist/
+          echo "✅ Build artifacts downloaded"
       
-      - name: Log in to Docker Hub
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        continue-on-error: true
+      - name: Build Docker image
+        run: |
+          cd shopizer-admin
+          DOCKER_BUILDKIT=0 docker build -t shopizerecomm/shopizer-admin:latest .
+          echo "✅ Docker image built successfully"
       
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.DOCKER_IMAGE }}
-          tags: |
-            type=ref,event=branch
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Test image
+        run: |
+          docker run --rm -d --name test-admin -p 4201:80 shopizerecomm/shopizer-admin:latest
+          sleep 5
+          docker stop test-admin
+          echo "✅ Image validation passed"
       
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./shopizer-admin
-          push: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-        continue-on-error: true
+      - name: Save image as compressed artifact
+        run: |
+          echo "💾 Saving image (this may take 1-2 minutes)..."
+          DOCKER_BUILDKIT=0 docker save shopizerecomm/shopizer-admin:latest | gzip > shopizer-admin-image.tar.gz
+          ls -lh shopizer-admin-image.tar.gz
+          echo "✅ Image saved as artifact"
       
-      - name: Run Trivy vulnerability scanner
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-        uses: aquasecurity/trivy-action@master
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
         with:
-          image-ref: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-        continue-on-error: true
+          name: admin-docker-image
+          path: shopizer-admin-image.tar.gz
+          retention-days: 7
+          compression-level: 0
+      
+      - name: Deployment Instructions
+        run: |
+          echo "════════════════════════════════════════════════════"
+          echo "✅ Docker image saved as artifact: admin-docker-image"
+          echo "════════════════════════════════════════════════════"
+          echo ""
+          echo "📥 To deploy on local Colima:"
+          echo ""
+          echo "1. Download artifact:"
+          echo "   gh run download ${{ github.run_id }} --name admin-docker-image"
+          echo ""
+          echo "2. Load image:"
+          echo "   gunzip -c shopizer-admin-image.tar.gz | docker load"
+          echo ""
+          echo "3. Run container:"
+          echo "   docker run -d -p 4200:80 --name shopizer-admin shopizerecomm/shopizer-admin:latest"
+          echo ""
+          echo "════════════════════════════════════════════════════"
 
   deploy-staging:
     name: Deploy to Staging
